@@ -34,6 +34,16 @@ function handleFiles(files) {
 function uploadFile(file) {
   const ext = file.name.split('.').pop().toLowerCase();
 
+  if (['exe', 'msi'].includes(ext)) {
+    alert(`File type .${ext} is not allowed`);
+    return;
+  }
+
+  if (file.size > 3 * 1024 * 1024 * 1024) {
+    alert('The file is too large! Try something smaller. (Max limit: 3 GB)');
+    return;
+  }
+
   progressContainer.style.display = 'block';
   linkContainer.style.display = 'none';
   progressText.textContent = 'Uploading...';
